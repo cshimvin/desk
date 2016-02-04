@@ -13,35 +13,25 @@ Desk.configure do |config|
   config.oauth_token_secret = ENV['DESK_OAUTH_TOKEN_SECRET']
 end
 
-######
-# List examples
-######
-
-start_date = '2016-01-28T00:00:01Z'
-end_date = '2016-02-01T00:00:01Z'
-
-# List cases
-#cases = Desk.cases
-#cases.each do |c|
-#  puts c.status
-#end
-
-start_timestamp = Time.parse(start_date).to_i
-end_timestamp = Time.parse(end_date).to_i
-list_cases = Desk.cases(:since_created_at => start_timestamp, :max_created_at => end_timestamp, :per_page => 500)
-list_cases.each do |c|
-  if (c.labels[0] != "Spam")
-    puts "#{c.created_at} #{c.subject} #{c.status}"
-  end
+def request_dates
+  print 'Start date (YYYY-MM-DD): '
+  @start_date = gets.chomp
+  print 'End date (YYYY-MM-DD): '
+  @end_date = gets.chomp
+  @start_date_time = @start_date + 'T00:00:01Z'
+  @end_date_time = @end_date + 'T23:59:59Z'
 end
 
-#Desk.create_insights_report(
-#  :resolution => "days",
-#  :min_date => "2016-01-28",
-#  :max_date => "2016-02-01",
-#  :dimension1_name => "*",
-#  :dimension1_values => "*",
-#  :dimension2_name => "*",
-#  :dimension2_values => "*"
-#)
-
+def output_cases
+  casecount = 0
+  start_timestamp = Time.parse(@start_date_time).to_i
+  end_timestamp = Time.parse(@end_date_time).to_i
+  list_cases = Desk.search_cases(:since_created_at => start_timestamp, :max_created_at => end_timestamp, :per_page => 500)
+  list_cases.each do |c|
+    if c.custom_fields['category'] != 'SPAM'
+      casecount += 1
+      puts "#{casecount} #{c.created_at} #{c.subject} #{c.status} #{c.custom_fields['category']}"
+    end
+  end
+  puts "Number of cases created between #{@start_date} and #{@end_date} excluding spam is #{casecount}"
+end
