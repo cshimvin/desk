@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Desk.com active cases</title>
+  </head>
+  <body>       
+    <p>The current active cases (new, open or pending) are:</p>
+    <table>
+    <% list = File.open('data/active.txt', 'r') %>
+
+    <% list.each do |line| %>
+      <tr><td>
+      <%= line.gsub('==','</td><td>') %>
+      </td></tr>
+    <% end %>
+    </table>
+    </body>
+    </html>
