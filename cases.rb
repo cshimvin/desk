@@ -44,7 +44,7 @@ def active_cases
   active = Desk.search_cases(:status => 'new,open,pending')
   active_file = File.open('data/active.txt', 'w')
   active.each do |c|
-    record = "#{c.id}==#{c.subject}==#{c.custom_fields['category']}==#{c.custom_fields['case_type']}==#{c.status}"
+    record = "#{c.id}==#{c.subject}==#{c.custom_fields['category']}==#{c.custom_fields['case_type']}==#{c.status}==#{c.customer.custom_fields['department']}"
     #customer = "#{c.customer.first_name}==#{c.customer.last_name}==#{c.customer.custom_fields['department']}"
     active_file.puts record
     puts record
@@ -54,5 +54,3 @@ end
 
 # request_dates
 # output_cases
-initialise
-active_cases

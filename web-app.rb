@@ -10,7 +10,5 @@ set :views, 'views'
 
 get '/active' do
   initialise
-  list = active_cases
-  puts list
   erb :activecases
 end
