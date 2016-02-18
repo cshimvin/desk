@@ -1,16 +1,18 @@
+<h1>Active cases</h1>
 <p>The current active cases (new, open or pending) are:</p>
 <table>
   <tr>
-    <th>ID</th><th>Status</th><th>Subject</th><th>Category</th><th>Type</th><th>Department</th>
-  <% active = Desk.search_cases(:status => 'new,open,pending') %>
+    <th>ID</th><th>Created</th><th>Last updated</th><th>Status</th><th>Subject</th><th>Category</th><th>Type</th>
+  <% active = Desk.search_cases(:status => 'new,open,pending', :sort_field => 'id', :sort_direction => 'desc') %>
   <% active.each do |c| %>
     <tr>
       <td><a href="/case/<%= c.id %>"><%= c.id %></a></td>
+      <td><%= c.created_at %></td>
+      <td><%= c.updated_at %></td>
       <td><%= c.status %></td>
       <td><%= c.subject %></td>
       <td><%= c.custom_fields['category'] %></td>
       <td><%= c.custom_fields['case_type'] %></td>
-      <td><%=c.customer.custom_fields['department'] %></td>
     </tr>
   <% end %>
 </table>

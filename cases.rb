@@ -52,5 +52,17 @@ def active_cases
   active_file.close
 end
 
+def case_details
+  init_case = Desk.case(params['caseid'])
+  details = init_case.message.body
+end
+
+def get_customer_name_email(case_id)
+  init_case = Desk.case(params['caseid'])
+  email = init_case.customer.emails
+  puts email
+  customer_name_email = "#{init_case.customer.first_name} #{init_case.customer.last_name} (#{email})"
+end
+
 # request_dates
 # output_cases
