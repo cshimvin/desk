@@ -1,10 +1,6 @@
-source "http://rubygems.org"
+source 'http://rubygems.org'
 
-gemspec
-
-
-group :development do
-end
-
-group :test do
-end
+gem 'rubyzip'
+gem 'sinatra'
+gem 'desk'
+gem 'time'

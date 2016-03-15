@@ -45,7 +45,6 @@ def active_cases
   active_file = File.open('data/active.txt', 'w')
   active.each do |c|
     record = "#{c.id}==#{c.subject}==#{c.custom_fields['category']}==#{c.custom_fields['case_type']}==#{c.status}==#{c.customer.custom_fields['department']}"
-    #customer = "#{c.customer.first_name}==#{c.customer.last_name}==#{c.customer.custom_fields['department']}"
     active_file.puts record
     puts record
   end
@@ -60,6 +59,7 @@ def case_details(case_id)
   @status = init_case.status
   @updated = init_case.updated_at
   @notes = Desk.case_notes(case_id)
+  @replies = Desk.list_case_replies(case_id)
 end
 
 def get_customer_name_email(case_id)
@@ -68,6 +68,3 @@ def get_customer_name_email(case_id)
   puts email
   @customer_name_email = "#{init_case.customer.first_name} #{init_case.customer.last_name} (#{init_case.email})"
 end
-
-# request_dates
-# output_cases

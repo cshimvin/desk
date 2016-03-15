@@ -25,6 +25,7 @@ get '/case/:caseid/?' do
       'created' => @created,
       'updated' => @updated,
       'case_notes' => @notes,
+      'case_replies' => @replies,
       'customer_name_email' => customer_name_email
     }
   else

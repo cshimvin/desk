@@ -39,7 +39,31 @@
 <div class="row">
   <div class="small-12 columns">
     <div class="panel">
-      <p><%= case_notes %></p>
+      <% case_notes.each do |note| %>
+      <p><%= note.to %></p>
+      <p><%= note.body %></p>
+      <hr />
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-12 columns">
+    <h2>Case replies:</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-12 columns">
+    <div class="panel">
+      <% case_replies.each do |reply| %>
+      <p>To: <%= reply.to %></p>
+      <p>From: <%= reply.from %></p>
+      <p>Date: <%= reply.created_at %></p>
+      <p><%= reply.body.to_s.gsub(/\n/, '<br />') %></p>
+      <hr />
+      <% end %>
     </div>
   </div>
 </div>

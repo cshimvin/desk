@@ -1,3 +1,39 @@
+Desk web interface
+==================
+
+Produces a clickable list of active cases providing details of each case.
+
+You must have desk and sinatra installed. If you don't, then run:
+
+<code>bundle install</code>
+
+Set the environment variables:
+
+* DESK_SUBDOMAIN
+* DESK_CONSUMER_KEY
+* DESK_CONSUMER_SECRET
+* DESK_OAUTH_TOKEN
+* DESK_OAUTH_TOKEN_SECRET
+
+To run, use:
+
+<code>ruby web-app.rb</code>
+
+This will start up sinatra to enable you to use the web interface.
+
+## Web interface
+
+### List of active cases
+
+For current pending, open and new cases:
+
+<code>http://localhost:4567/active/</code>
+
+To display a particular case:
+
+<code>http://localhost:4567/case/CASE_NUMBER</code>
+
+
 The Desk Ruby Gem
 ====================
 A Ruby wrapper for the [Desk.com API](http://dev.desk.com/)
